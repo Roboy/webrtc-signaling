@@ -5,3 +5,13 @@ It is based on the [MDN Chat-Server example](https://github.com/mdn/samples-serv
 
 The goal is to have a small docker container that has everything, including a turn server,
 to be deployed and used to connect WebRTC clients.
+
+## Running
+
+To run everything (signaling server and turn server), use:
+
+    docker compose up
+
+to make sure that the container is freshly built use:
+
+    docker compose up --build
