@@ -271,6 +271,13 @@ wsServer.on('request', function(request) {
     };
     connection.sendUTF(JSON.stringify(msg));
 
+    
+    msg = {
+      type: "webrtc_config",
+      config: printConfigInfo(request)
+    };
+    connection.sendUTF(JSON.stringify(msg));
+
     // Set up a handler for the "message" event received over WebSocket. This
     // is a message sent by a client, and may be text to share with other
     // users, a private message (text or signaling) for one user, or a command
