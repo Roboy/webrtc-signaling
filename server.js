@@ -186,7 +186,7 @@ if (!webServer) {
 
 
 function printConfigInfo(request){
-  const hostname = request.headers.host.replace(/:.+/, '');
+  const hostname = (request.host || request.headers.host).replace(/:.+/, '');
 
   // disable special ports & https for now
   const stunPorts = [3478, 3479]; //, 80, 5349, 5350, 443];
