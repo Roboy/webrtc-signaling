@@ -5,7 +5,7 @@ services:
     ports:
       - "8080:8080"
   turn:
-    image: "coturn:alpine"
+    image: "coturn/coturn:alpine"
     ports:
       ## STUN/TURN
       - "3478:3478"
@@ -22,5 +22,5 @@ services:
       - "443:443"
       - "443:443/udp"
       # Relay Ports
-      - "49152-65535:49152-65535"
-      - "49152-65535:49152-65535/udp"
+      # - "49152-65535:49152-65535"
+      # - "49152-65535:49152-65535/udp"

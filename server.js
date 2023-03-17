@@ -185,15 +185,40 @@ if (!webServer) {
 }
 
 
+function printConfigInfo(request){
+  const hostname = request.headers.host.replace(/:.+/, '');
+
+  // disable special ports & https for now
+  const stunPorts = [3478, 3479]; //, 80, 5349, 5350, 443];
+  const turnPorts = [3478, 3479]; //, 80, 5349, 5350, 443];
+
+  // build urls for the co-hosted coturn server
+
+  const stunUrls = stunPorts.map(p => 'stun:'+hostname+':'+p);
+  const turnUrls = stunPorts.map(p => 'turn:'+hostname+':'+p);
+
+  return {
+    'stun': stunUrls,
+    'turn': turnUrls,
+  }
+}
+
+
 // Our HTTPS server does nothing but service WebSocket
 // connections, so every request just returns 404. Real Web
 // requests are handled by the main server on the box. If you
 // want to, you can return real HTML here and serve Web content.
 
 function handleWebRequest(request, response) {
-  log ("Received request for " + request.url);
-  response.writeHead(404);
-  response.end();
+  log("Received request for " + request.url);
+  if (request.url === '/config') {
+    log('printing config');
+    response.writeHead(200, {"Content-Type": "application/json"});
+    response.end(JSON.stringify(printConfigInfo(request)));
+  } else {
+    response.writeHead(404);
+    response.end();
+  }
 }
 
 // Spin up the HTTPS server on the port assigned to this sample.
