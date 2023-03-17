@@ -284,7 +284,7 @@ wsServer.on('request', function(request) {
 
         var sendToClients = true;
         msg = JSON.parse(message.utf8Data);
-        var connect = getConnectionForID(msg.id);
+        var connect = connection; //getConnectionForID(msg.id);
 
         // Take a look at the incoming object and act on it based
         // on its type. Unknown message types are passed through,
@@ -341,6 +341,8 @@ wsServer.on('request', function(request) {
         // exchange signaling and other control objects unimpeded.
 
         if (sendToClients) {
+          // force-add name of sender to message
+          msg.name = connect.username;
           var msgString = JSON.stringify(msg);
           var i;
 
