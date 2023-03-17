@@ -289,8 +289,11 @@ wsServer.on('request', function(request) {
 
         // Process incoming data.
 
-        var sendToClients = true;
         msg = JSON.parse(message.utf8Data);
+        if(!msg)
+          return;
+
+        var sendToClients = true;
         var connect = connection; //getConnectionForID(msg.id);
 
         // Take a look at the incoming object and act on it based
