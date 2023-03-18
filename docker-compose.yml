@@ -4,6 +4,7 @@ services:
     build: .
     ports:
       - "8080:8080"
+    restart: unless-stopped
   turn:
     image: "coturn/coturn:alpine"
     ports:
@@ -24,3 +25,4 @@ services:
       # Relay Ports
       # - "49152-65535:49152-65535"
       # - "49152-65535:49152-65535/udp"
+    restart: unless-stopped
