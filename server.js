@@ -288,8 +288,14 @@ wsServer.on('request', function(request) {
         log("Received Message: " + message.utf8Data);
 
         // Process incoming data.
+        try {
+          msg = JSON.parse(message.utf8Data);
+        }
+        catch (error) {
+          console.error(error);
+          return
+        }
 
-        msg = JSON.parse(message.utf8Data);
         if(!msg)
           return;
 
