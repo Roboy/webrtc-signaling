@@ -7,7 +7,7 @@ services:
     restart: unless-stopped
   turn:
     image: "coturn/coturn:alpine"
-    command: --lt-cred-mech --user roboy:4dE5?3sgPb0fOrw5Vh --min-port=49160 --max-port=49200
+    command: --lt-cred-mech --user roboy:4dE5?3sgPb0fOrw5Vh --min-port=49160 --max-port=49200 -v
     network_mode: "host"
     ports:
       ## STUN/TURN
