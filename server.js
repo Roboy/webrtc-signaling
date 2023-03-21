@@ -197,7 +197,17 @@ function printConfigInfo(request){
   const stunUrls = stunPorts.map(p => 'stun:'+hostname+':'+p);
   const turnUrls = stunPorts.map(p => 'turn:'+hostname+':'+p);
 
+  const stunServer = {
+    urls: stunUrls
+  };
+  const turnServer = {
+    urls: turnUrls,
+    username: "roboy",
+    credential: "4dE5?3sgPb0fOrw5Vh"
+  }
+
   return {
+    'iceServers': [stunServer, turnServer],
     'stun': stunUrls,
     'turn': turnUrls,
   }
